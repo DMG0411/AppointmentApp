@@ -1,15 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    .white-text {
+        color: white;
+    }
+</style>
     <div class="container mx-auto mt-8">
         <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md">
-            <h1 class="text-3xl font-semibold mb-4">Available hours</h1>
+            <h1 class="text-3xl font-semibold mb-4 white-text">Available hours</h1>
 
             <form action="{{ route('appointments.store') }}" method="post">
                 @csrf
 
                 <div class="mb-4">
-                    <label for="availableHoursSelect">Select available hour:</label>
+                    <label for="availableHoursSelect" class="white-text">Select available hour:</label>
                     <select name="hour" id="availableHoursSelect" required>
                         @foreach ($availableHours as $hour)
                             <option value="{{ $hour }}">{{ $hour }}</option>

@@ -72,10 +72,15 @@ class AppointmentController extends Controller
         return view('appointments.results', compact('availableHours'));
     }
 
-    public function index(){
+    public function showDashboard()
+    {
+        // Get the currently logged-in user
         $user = Auth::user();
-        $appointments = Appointment::where('user_id', $user->id)->get();
-        return view('dashboard',compact('appointments'));
+
+        // Get the appointments for the current user
+        $appointments = $user->appointments;
+
+        return view('dashboard', compact('appointments'));
     }
 
     public function store(Request $request)
