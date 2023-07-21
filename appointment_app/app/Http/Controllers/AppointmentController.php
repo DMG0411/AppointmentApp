@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Carbon;
 use App\Models\Appointment;
 use Illuminate\Support\Facades\Auth;
-use Carbon\CarbonInterval;
+use Illuminate\Support\Facades\Log;
 
 
 class AppointmentController extends Controller
@@ -74,13 +74,16 @@ class AppointmentController extends Controller
 
     public function showDashboard()
     {
-        // Get the currently logged-in user
-        $user = Auth::user();
+      // Get the authenticated user's id
+      $userId = Auth::id();
 
-        // Get the appointments for the current user
-        $appointments = $user->appointments;
-
-        return view('dashboard', compact('appointments'));
+      // Fetch appointments data for the authenticated user from the database
+      $appointments = Appointment::where('user_id', $userId)->get();
+  
+      Log::info('Appointments for user with ID ' . $userId . ': ' . $appointments);
+  
+      // Return the appointments data to the view
+      return view('dashboard')->with('appointments', $appointments);
     }
 
     public function store(Request $request)
