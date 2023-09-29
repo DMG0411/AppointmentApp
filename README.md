@@ -14,4 +14,4 @@ Consultants can login as admins and can see their appointments.
 
 -> JavaScript
 
--> MySQL via XAMPP ( used phpmyadmin to manage DB datas )
+-> MySQL via XAMPP ( used phpmyadmin to manage DB data )
